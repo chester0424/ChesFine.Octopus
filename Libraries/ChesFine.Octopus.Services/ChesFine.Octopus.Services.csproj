@@ -40,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categories\CategoryExtensions.cs" />
+    <Compile Include="Categories\CategoryService.cs" />
+    <Compile Include="Categories\ICategoryService.cs" />
+    <Compile Include="Thmes\IThemeService.cs" />
+    <Compile Include="Thmes\ThemeExtensions.cs" />
+    <Compile Include="Thmes\ThemeService.cs" />
     <Compile Include="Users\IUserService.cs" />
     <Compile Include="Users\UserExtensions.cs" />
     <Compile Include="Users\UserService.cs" />

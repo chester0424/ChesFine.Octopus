@@ -12,9 +12,9 @@ namespace ChesFine.Octopus.Data.Mapping
         public UserMapp()
         {
             this.ToTable("User");
-            this.HasKey(a => a.Id);
+            //this.HasKey(a => a.Id);
 
-            this.Property(c => c.Name).IsRequired().HasMaxLength(50);
+            //this.Property(c => c.Name).IsRequired().HasMaxLength(50);
         }
     }
 }

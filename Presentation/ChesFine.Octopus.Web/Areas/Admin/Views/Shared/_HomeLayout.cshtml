@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>后台管理-@ViewBag.Title</title>
+       
+        @Styles.Render("~/easyui-css")
+        @Scripts.Render("~/commonscript")
+        @Scripts.Render("~/easyui-js")
+
+        @RenderSection("head", required: false)
+    </head>
+    <body>
+        <header class="navbar navbar-inverse navbar-fixed-top" id="top" role="banner">
+            <div class="container">
+                <div class="col-xs-1 col-lg-1 col-sm-1 col-md-1"  ></div>
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">To be No.1</a>
+                </div>
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li  class="active">
+                            <a href="../getting-started/">技术</a>
+                        </li>
+                        <li>
+                            <a href="../css/">阅读</a>
+                        </li>
+                        <li>
+                            <a href="../components/">组件</a>
+                        </li>
+                        <li>
+                            <a href="../javascript/">生活</a>
+                        </li>
+                        <li>
+                            <a href="../customize/">定制</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                   
+                </nav>
+            </div>
+        </header>
+        <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="../" class="navbar-brand">Bootstrap</a>
+                </div>
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="../getting-started/">起步</a>
+                        </li>
+                        <li>
+                            <a href="../css/">全局 CSS 样式</a>
+                        </li>
+                        <li class="active">
+                            <a href="../components/">组件</a>
+                        </li>
+                        <li>
+                            <a href="../javascript/">JavaScript 插件</a>
+                        </li>
+                        <li>
+                            <a href="../customize/">定制</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="http://job.bootcss.com" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', 'doc-home-navbar-job'])" target="_blank">高薪工作</a></li>
+                        <li><a href="http://expo.bootcss.com" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', 'doc-home-navbar-expo'])" target="_blank">优站精选</a></li>
+                        <li><a href="http://blog.getbootstrap.com" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', 'doc-home-navbar-blog'])" target="_blank">官方博客</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        @RenderBody()
+    </body>
+</html>

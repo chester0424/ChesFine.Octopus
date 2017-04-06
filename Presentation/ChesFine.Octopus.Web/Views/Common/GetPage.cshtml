@@ -1,0 +1,82 @@
+﻿<nav>
+    <ul class="pagination">
+        @*逻辑：如果当前页是第一页，则上一页不展示；如果当前页是最后一页，下一页不展示；最多展示7也（当前和前后3页） *@
+        @* 页码从数字1开始 *@
+        @{
+            var currentIndex = (int)ViewData["PageCurrentIndex"];
+            var count = (int)ViewData["PageCount"];
+
+            var pageNumber = currentIndex;
+            //计算需要展示的页码，用数组表示
+            var leftlen = pageNumber;
+            var rightlen = count - pageNumber;
+            List<int> pageNumbers = new List<int>();
+            if (leftlen < rightlen)
+            {
+                //先从左边获取不超过3个，剩下的从后边获取
+                for (var i = pageNumber - 1; i >= pageNumber - 3 && i >= 1; i--)
+                {
+                    pageNumbers.Insert(0, i);
+                }
+                pageNumbers.Add(pageNumber);
+                for (var j = pageNumber + 1; j <= count && pageNumbers.Count <= 6; j++)
+                {
+                    pageNumbers.Add(j);
+                }
+            }
+            else
+            {
+                //先从右边获取不超过3个，剩下的从左边获取
+                for (var i = pageNumber + 1; i <= pageNumber + 3 && i < count; i++)
+                {
+                    pageNumbers.Add(i);
+                }
+                pageNumbers.Insert(0, pageNumber);
+                for (var j = pageNumber - 1; j >= 1 && pageNumbers.Count <= 6; j--)
+                {
+                    pageNumbers.Insert(0, j);
+                }
+            }
+
+
+            if (pageNumbers[0] != pageNumber)
+            {
+                <li><a href="#">&laquo;</a></li>
+            }
+            foreach (var n in pageNumbers)
+            {
+                if (pageNumber == n)
+                {
+                    <li class="active"><span>@n <span class="sr-only">(current)</span></span></li>
+                }
+                else
+                {
+                    <li><a href="#">@n</a></li>
+                }
+            }
+            if (pageNumbers[pageNumbers.Count() - 1] != pageNumber)
+            {
+                <li><a href="#">&raquo;</a></li>
+            }
+        }
+        @*<li><a href="#">&laquo;</a></li>
+        <li  class="active"><a href="#"  >1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
+        <li><a href="#" val="4">4</a></li>
+        <li><a href="#" val="5">5</a></li>
+        <li><a href="#">&raquo;</a></li>*@
+    </ul>
+</nav>
+<form id="pageForm" action="?pageIndex=4"></form>
+<script type="text/javascript">
+    $(function () {
+        $(".pagination a").click(function (e) {
+            var val = $(this).attr("val");
+            var form = $("#pageForm");
+            form.attr("action","?pageIndex=" + val);
+            form.submit();
+        });
+    });
+</script>

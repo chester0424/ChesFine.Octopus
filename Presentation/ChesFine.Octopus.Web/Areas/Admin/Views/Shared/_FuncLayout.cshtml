@@ -1,0 +1,25 @@
+﻿@* 功能也面的布局样式，主要是加载公共的内容，样式、脚本的等 *@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/easyui-css")
+    @Scripts.Render("~/commonscript")
+    @Scripts.Render("~/easyui-js")
+  
+    @RenderSection("head", required: false)
+</head>
+<body>@RenderBody()
+    @*<div> 
+       
+    </div>*@
+</body>
+</html>

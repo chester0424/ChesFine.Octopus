@@ -1,18 +1,71 @@
-﻿
-@{
-    Layout = null;
-}
-
+﻿@using ChesFine.Octopus.Web.FrameWork;
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <meta charset="UTF-8">
+    <title>To Be No.1</title>
+    @Styles.Render("~/common-css")
+    @Scripts.Render("~/jquery-js")
+    @this.RenderScript()
+    @this.RenderStyle()
 </head>
 <body>
-    <div> 
-        Index
+    <div class="mainBody">
+        <div class="header">
+            <div>
+                <p class="pageTitle">To Be A Better Man </p>
+                <p class="pageTitleLitle"> (with no boundaries)</p>
+            </div>
+        </div>
+        <div class="mainContent">
+            <div class="themeContainer" id="themeContainer">
+                <ul id="themeItemContainer">
+                    <li style="background-image: url(http://pic16.nipic.com/20110907/4507710_120011041718_2.jpg);">
+                        <a href="topic.html">
+                            <div class="themeItem">
+                                <p class="themeTitle">每周一变</p>
+                                <p class="themeShorDescription">每周做一件没有做过的事情或者达到没有达到的高度……</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li style="background-image: url(http://pic.58pic.com/58pic/12/06/33/60P58PICyFi.jpg);">
+                        <div class="themeItem">
+                            <h3 class="themeTitle">时光荏苒</h3>
+                            <p class="themeShorDescription">时光有两种方式存在，一种是享受时光，一种是消磨时光</p>
+                        </div>
+                    </li>
+                    <li style="background-image: url(http://img1.3lian.com/img013/v5/4/d/103.jpg)">
+                        <div class="themeItem">
+                            <h3 class="themeTitle"></h3>
+                            <p class="themeShorDescription"></p>
+                        </div>
+                    </li>
+                    <li style="background-image: url(http://img.taopic.com/uploads/allimg/130320/240404-1303200R04047.jpg)">
+                        <div class="themeItem">
+                            <h3 class="themeTitle"></h3>
+                            <p class="themeShorDescription"></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="themeItem">
+                            <h3 class="themeTitle"></h3>
+                            <p class="themeShorDescription"></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="themeItem">
+                            <h3 class="themeTitle"></h3>
+                            <p class="themeShorDescription"></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="footer"></div>
+    </div>
+    <div class="wechat">
+        <div class="realWechat"></div>
     </div>
 </body>
 </html>

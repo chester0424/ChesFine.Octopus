@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "主题";
+    Layout = "~/Areas/Admin/Views/Shared/_FuncLayout.cshtml";
+}
+@section head{
+    <style type="text/css">
+        #fm {
+            margin: 0px;
+            padding: 10px 30px;
+        }
+
+        .ftitle {
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+            padding: 5px 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .fitem {
+            margin-bottom: 5px;
+        }
+
+            .fitem label {
+                display: inline-block;
+                width: 80px;
+            }
+    </style>
+}
+
+<!--查询部分-->
+<div>
+    <form id="themeQueryForm" method="post">
+        <table cellpadding="1" style="margin-top:10px;margin-left:10px;">
+            <tr>
+                <td>名称:</td>
+                <td><input class="easyui-textbox" type="text" name="Name" /></td>
+            </tr>
+            <tr>
+                <td>说明:</td>
+                <td><input class="easyui-textbox" type="text" name="Resume" /></td>
+                <td>
+                    <a href="#" onclick="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="query">查询</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!--表格展示部分-->
+<div style="margin:10px 0;"></div>
+<table class="easyui-datagrid" id="themedg" style="min-height:400px;"></table>
+
+<script type="text/javascript">
+    $(function () {
+        $('#themedg').datagrid({
+            title: '主题信息',
+            url: '/Admin/Theme/ThemeQuery',
+            method: "GET",
+            loadMsg: "请求数据中，请稍后……",
+            columns: [[
+                { field: 'Id', title: '编号', width: 30, sortable: true },
+                { field: 'Name', title: '名称', width: 100, align: 'left', sortable: true },
+                { field: 'ShortResume', title: '简述', width: 100, align: 'center' },
+                { field: 'Resume', title: '描述', width: 100, align: 'center' },
+                { field: 'Image', title: '图片', width: 100 },
+                { field: 'Priority', title: '优先级', width: 30, align: 'right' }
+            ]],         //配置列
+            rownumbers: true,   //显示行号
+            striped: true,      //即奇偶行使用不同背景色
+            singleSelect: true, //单选行
+            checkOnSelect: true,
+            selectOnCheck: true,
+            fitColumns: true,   //自适应列
+            nowrap: false,      //显示在一行
+            idField: "Id",      //标识字段
+            toolbar: [{
+                iconCls: 'icon-add',
+                text: "增加",
+                handler: function () {
+                    addTheme();
+                }
+            }, '-', {
+                iconCls: 'icon-edit',
+                text: "编辑",
+                handler: function () {
+                    editTheme();
+                }
+            }, '-', {
+                text: "删除",
+                iconCls: 'icon-remove',
+                handler: function () {
+                    alert('remove')
+                }
+            }],
+            pagination: true,       //显示分页工具栏
+            pagePosition: "bottom", //分页栏的位置
+            pageNumber: 1,          //初始页码
+            pageSize: 20,           //每页行数
+            pageList: [10, 20, 30, 40, 50, 80, 100],    //可选的页面尺寸
+            queryParams: { frompage: "Theme" },         //自定义参数
+        });
+        $('#themedg').datagrid('getPager').pagination({ //分页栏下方文字显示
+            beforePageText: '第',
+            afterPageText: "/页,共{pages}页",
+            displayMsg: '当前显示从第{from}条到{to}条 共{total}条记录',
+            showRefresh: true,
+            onBeforeRefresh: function (pageNumber, pageSize) {
+                $(this).pagination('loading');
+                $('#themedg').datagrid('reload');
+                $(this).pagination('loaded');
+            }
+        });
+
+        $("#query").click(function () {
+            var searchForm = $("#themeQueryForm").form();
+            $("#themedg").datagrid('reload', serializeObject(searchForm));
+        });
+        function serializeObject(form) {
+            var o = {};
+            $.each(form.serializeArray(), function (index) {
+                if (o[this['name']]) {
+                    o[this['name']] = o[this['name']] + "," + this['value'];
+                } else {
+                    o[this['name']] = this['value'];
+                }
+            })
+            return o;
+        }
+    });
+</script>
+<!--编辑框部分-->
+<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+     closed="true" buttons="#dlg-buttons">
+    <div class="ftitle">主题信息</div>
+    <form id="fmtheme" method="post">
+        <input type="hidden" name="Id">
+        <div class="fitem">
+            <label>名称:</label>
+            <input name="Name" class="easyui-validatebox"  required="true">
+        </div>
+        <div class="fitem">
+            <label>简述:</label>
+            <input name="ShortResume"  class="easyui-validatebox"  required="true">
+        </div>
+        <div class="fitem">
+            <label>描述:</label>
+            <input name="Resume"  class="easyui-validatebox"  required="true">
+        </div>
+        <div class="fitem">
+            <label>图片:</label>
+            <input type="file" id="file"  name="img"/>
+            <button onclick="uploadFile()" id="btnUploadFile">上传</button>
+        </div>
+        <div class="fitem">
+            <label>优先级:</label>
+            <input name="Priority" >
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">Save</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">Cancel</a>
+</div>
+<script>
+    function addTheme() {
+        $('#dlg').dialog('open').dialog('setTitle', '增加主题');
+        $('#fmtheme').form('clear');
+        $('#dlg').window('open');
+    };
+    //编辑
+    function editTheme() {
+        var row = $('#dg').datagrid('getSelected'); //返回选中的行数据
+        if (row) {
+            $('#dlg').dialog('open').dialog('setTitle', 'Edit User');//打开弹窗，
+            $('#fmtheme ').form('clear');
+            $('#fm').form('load', row); //把数据加载到#fm中
+            url = 'update_user.php?id=' + row.id;
+        }
+    };
+    //删除
+    function destroyTheme() {
+        var row = $('#dg').datagrid('getSelected');//获取选择行
+        if (row) {
+            //提示是否删除
+            $.messager.confirm('Confirm', 'Are you sure you want to destroy this user?', function (r) {
+                if (r) {
+                    //提交删除请求
+                    $.post('http://localhost:55427/users/DeleteUser', { id: row.id }, function (result) {
+                        if (result.success) {
+                            $('#dg').datagrid('reload');	// reload the user data
+                        } else {
+                            $.messager.show({	// show error message
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+        }
+    };
+    //保存
+    function saveTheme() {
+
+    }
+
+    function uploadFile() {
+        alert("aaa");
+        //$("#loading").ajaxStart(function () {
+        //    $(this).show();
+        //})//开始上传文件时显示一个图片  
+        //.ajaxComplete(function () {
+        //    $(this).hide();
+        //});//文件上传完成将图片隐藏起来  
+
+        $.ajaxFileUpload({
+            url: '/Common/FileUpload',//用于文件上传的服务器端请求地址  
+            secureuri: false,//一般设置为false  
+            fileElementId: 'file',//文件上传控件的id属性  
+            dataType: 'json',//返回值类型 一般设置为json  
+            success: function (data, status) //服务器成功响应处理函数  
+            {
+                alert(data.message);//从服务器返回的json中取出message中的数据,其中message为在struts2中定义的成员变量  
+                if (typeof (data.error) != 'undefined') {
+                    if (data.error != '') {
+                        alert(data.error);
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            },
+            error: function (data, status, e)//服务器响应失败处理函数  
+            {
+                alert(e);
+            }
+        })
+        return false;
+    }
+</script>  
+

@@ -29,8 +29,9 @@ namespace ChesFine.Octopus.Services.Users
 
         public virtual IList<User> GetAllUsers()
         {
-            var query = _userReportory.Table;
-            return query.ToList();
+            //var query = _userReportory.Table;
+            //return query.ToList();
+            return new List<User>() { new User() { Id = 1, Name = "abc", Age = 33 } };
         }
 
         #endregion

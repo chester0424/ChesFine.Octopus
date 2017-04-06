@@ -1,0 +1,21 @@
+.conentwrap{
+	display: block;
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+
+.articleTitle{
+	text-align: center;
+	color: #FFF;
+}
+
+.author{
+	text-align: center;
+	color: #FFF;
+}
+.articleContent{
+ 	color: #FFF;
+ 	margin-top: 20px;
+}

@@ -1,0 +1,87 @@
+.conentwrap{
+	display: block;
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+.introduce{
+	height: 170px;
+	position: relative;
+	border-bottom: 1px solid #6F716A;
+
+}
+
+.topicimg{
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+	background-image: url(http://pic16.nipic.com/20110907/4507710_120011041718_2.jpg);
+	background-position: center;
+	background-size: cover; 	
+	border-width: 5px;
+	border-style: solid;
+	border-color: #4D4D48;
+	display: inline-block;
+	float: left;
+	animation: rotate360 10s linear 1s infinite ;/*alternate;*/
+}
+
+@keyframes rotate360
+{
+	from {transform:rotate(0deg);}
+	to {transform:rotate(-360deg);}
+}
+
+@-moz-keyframes rotate360 /* Firefox */
+{
+	from {-moz-transform:rotate(0deg)}
+	to {-moz-transform:rotate(-360deg)}
+}
+
+@-webkit-keyframes rotate360 /* Safari 和 Chrome */
+{
+from {-webkit-transform:rotate(0deg)}
+to {-webkit-transform:rotate(-360deg)}
+}
+
+@-o-keyframes rotate360 /* Opera */
+{
+from {-o-transform:rotate(0deg)}
+to {-o-transform:rotate(-360deg)}
+}
+
+
+.topicDescription{
+	display: inline-block;
+	margin-left: 20px;
+	height: 150px;
+	float: left;
+}
+.topicTitle{
+	font-weight: 500;
+	font-size: 50px;
+	color: #FFFFFF;
+	height:60px;
+}
+
+.topicDescriptionContent{
+	margin-top: 10px;
+	margin-left: 20px;
+	height: 90px;
+	color: #D7DEF0;
+	max-width: 580px;
+	line-height:25px;
+}
+
+.article{
+	color: #000;
+}
+
+.article ul{
+	margin: 30px 20px 20px 40px;
+}
+
+.article li{
+	height: 35px;
+}

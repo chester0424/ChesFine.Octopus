@@ -21,7 +21,9 @@ namespace ChesFine.Octopus.Data
         {
             Database.SetInitializer<OctopusDbContext>(null);//不用初始化数据库
 
-            this.Database.Log = Console.Write;
+            this.Database.Log = (sql) => {
+                Console.WriteLine(sql);
+            }; // Console.Write;
         }
         #region Utilities
 

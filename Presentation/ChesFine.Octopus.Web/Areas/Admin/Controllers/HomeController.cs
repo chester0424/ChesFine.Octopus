@@ -13,5 +13,7 @@ namespace ChesFine.Octopus.Web.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public ActionResult Index2() { return View(); }
     }
 }

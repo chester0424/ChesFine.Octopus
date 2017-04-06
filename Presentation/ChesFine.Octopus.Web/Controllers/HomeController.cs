@@ -1,4 +1,7 @@
-﻿using ChesFine.Octopus.Services.Users;
+﻿using AutoMapper;
+using ChesFine.Octopus.Entities;
+using ChesFine.Octopus.Services.Users;
+using ChesFine.Octopus.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +30,10 @@ namespace ChesFine.Octopus.Web.Controllers
         // GET: Default
         public ActionResult Index()
         {
-            var data = _userService.GetAllUsers();
-            return View();
+            var datas = _userService.GetAllUsers();
+            Mapper.Initialize(cfg => cfg.CreateMap<User, UserModel>());
+            var models = Mapper.Map<IList<UserModel>>(datas);
+            return View(models);
         }
     }
 }
